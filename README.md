@@ -5,11 +5,11 @@
 ```
 
 |common
----|helloworld
+    |helloworld
 |dependency
----|local
------|wordpress
----|repository
------|wordpress
+    |local
+        |wordpress
+    |repository
+        |wordpress
 
 ```

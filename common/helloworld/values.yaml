@@ -1,18 +1,18 @@
-# Default values for gowebapp.
+# Default values for helloworld.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: ""
-  pullPolicy: ""
+  repository: fauzancloud/sample-flask
+  pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "latest"
 
 imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
+nameOverride: "helloworld-flask"
+fullnameOverride: "helloworld-flask"
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -39,15 +39,16 @@ securityContext: {}
 service:
   type: ClusterIP
   port: 80
+  dstPort: 5000
 
 ingress:
-  enabled: false
+  enabled: true
   className: ""
   annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
   hosts:
-    - host: chart-example.local
+    - host: sample-flask.local
       paths:
         - path: /
           pathType: ImplementationSpecific
@@ -55,25 +56,6 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
-mysql:
-  mysqlDatabase: employeedb
-  mysqlRootPassword: password
-  persistance:
-    enabled: false
-
-labels:
-  app.kubernetes.io/name: app
-  app.kubernetes.io/instance: goweb-app
-  app.kubernetes.io/version: "1.16.0"
-
-matchLabels:
-  app.kubernetes.io/name: app
-  app.kubernetes.io/instance: goweb-app
-
-containers:
-  name: goweb-app
-  image: opstreedevops/ot-go-webapp
-  tag: "v1"
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
